@@ -32,7 +32,7 @@ def inicio(request):
 
 def autos(request):
     autos = Auto.objects.all()
-    return render(request, 'auto.html', {'auto': autos})
+    return render(request, 'autos.html', {'autos': autos})
 
 
 def mostrar_horario(request):
