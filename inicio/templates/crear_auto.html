@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% comment %} <h1>se creo el alumno {{alumno}} correctamente...</h1> {% endcomment %}
+
+    <h1>Crear Auto</h1>
+
+    <form action={%url "crear_auto"%} method="POST">
+        {% csrf_token %}
+        {% comment %} <p>
+            Nombre
+            <input type="text" name="nombre">
+        </p>    
+        <p>
+            Apellido
+            <input type="text" name="apellido">
+        </p>
+        <p>
+            Edad
+            <input type="number" name="edad">
+        </p> {% endcomment %}
+        <table>
+            {{formulario}}
+        </table>
+        <input type="submit" value="Crear Auto">    
+    </form>
+</body>
+</html>
