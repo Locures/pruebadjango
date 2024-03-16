@@ -5,3 +5,7 @@ class FomularioCreacionAuto(forms.Form):
     marca = forms.CharField(max_length=30)
     ano = forms.IntegerField()
     
+class FomularioBusquedaAuto(forms.Form):
+    patente = forms.CharField(max_length=20, required=False)
+    
+    

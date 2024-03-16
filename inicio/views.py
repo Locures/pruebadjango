@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.template import Template, Context, loader
 from inicio.models import Auto
 import random
-from inicio.forms import FomularioCreacionAuto
+from inicio.forms import FomularioCreacionAuto, FomularioBusquedaAuto
 
 # Create your views here.
 def inicio(request):
@@ -28,11 +28,16 @@ def inicio(request):
     # template_renderizado = template.render(dicc)
     # return HttpResponse(template_renderizado)
 
-    return render(request, 'inicio.html', {})
+    # return render(request, 'inicio/inicio.html', {})
+    return render(request, 'base.html')
 
 def autos(request):
     autos = Auto.objects.all()
-    return render(request, 'autos.html', {'autos': autos})
+    formulario = FomularioBusquedaAuto(request.GET)
+    if formulario.is_valid():
+        patenta_a_buscar = formulario.cleaned_data.get('patente')
+        autos = Auto.objects.filter(patente__icontains=patenta_a_buscar)
+    return render(request, 'inicio/autos.html', {'autos': autos, 'formulario': formulario})
 
 
 def mostrar_horario(request):
@@ -69,6 +74,6 @@ def crear_auto(request):
             
         
     formulario = FomularioCreacionAuto()
-    return render(request,'crear_auto.html', {'formulario': formulario})
+    return render(request,'inicio/crear_auto.html', {'formulario': formulario})
 
     

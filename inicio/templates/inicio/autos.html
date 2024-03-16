@@ -11,6 +11,12 @@
         <a href={% url "autos" %}>Autos</a>
         <a href={% url "crear_auto" %}>Ingresar Auto</a>
     </nav>
+    <h1>Listado de Autos</h1>
+    <form action="{% url 'autos' %}" method="GET">
+        {{formulario}}
+        <input type="submit" value ="Buscar">
+    </form>
+    {% if autos %}
     <ul>
         {% for auto in autos %}
             {% if auto.nafta > 3 %}
@@ -23,5 +29,8 @@
             
         {% endfor %}
     </ul>
+    {% else %}
+    <p> No se encontraron la patente cargada </p>
+    {% endif %}
 </body>
 </html>
