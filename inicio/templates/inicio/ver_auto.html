@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block h1_header %}
+ Datos del Auto {{auto.id}}
+{% endblock h1_header %}
+{% block main %}
+
+<ul> 
+    <li> Patente: {{auto.patente}} </li>
+    <li> Marca: {{auto.marca}} </li>
+    <li> Ano: {{auto.ano}} </li>
+    <li> Nafta actual: {{auto.nafta}} </li>
+
+</ul>
+
+{% endblock main %}

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.template import Template, Context, loader
 from inicio.models import Auto
 import random
-from inicio.forms import FomularioCreacionAuto, FomularioBusquedaAuto
+from inicio.forms import FomularioCreacionAuto, FomularioBusquedaAuto, FomularioEdicionAuto
 
 # Create your views here.
 def inicio(request):
@@ -28,8 +28,8 @@ def inicio(request):
     # template_renderizado = template.render(dicc)
     # return HttpResponse(template_renderizado)
 
-    # return render(request, 'inicio/inicio.html', {})
-    return render(request, 'base.html')
+    return render(request, 'inicio/inicio.html', {})
+    # return render(request, 'base.html')
 
 def autos(request):
     autos = Auto.objects.all()
@@ -76,4 +76,28 @@ def crear_auto(request):
     formulario = FomularioCreacionAuto()
     return render(request,'inicio/crear_auto.html', {'formulario': formulario})
 
+def eliminar_auto(request, id_auto):
+    auto = Auto.objects.get(id=id_auto)
+    auto.delete()
+    return redirect('autos')
     
+def editar_auto(request,id_auto):
+    auto = Auto.objects.get(id=id_auto)
+    formulario = FomularioEdicionAuto(initial={'patente': auto.patente, 'marca': auto.marca, 'ano': auto.ano, 'nafta': auto.nafta})
+    if request.method == 'POST':
+        formulario = FomularioEdicionAuto(request.POST)
+        if formulario.is_valid():
+            info_nueva = formulario.cleaned_data
+            auto.patente = info_nueva.get('patente')
+            auto.marca = info_nueva.get('marca')
+            auto.ano = info_nueva.get('ano')
+            auto.nafta = info_nueva.get('nafta')
+            
+            auto.save()
+            return redirect('autos')
+            
+    return render(request, 'inicio/editar_auto.html', {'auto': auto, 'formulario': formulario})
+    
+def ver_auto(request, id_auto):
+    auto = Auto.objects.get(id=id_auto)
+    return render(request, 'inicio/ver_auto.html', {'auto': auto})

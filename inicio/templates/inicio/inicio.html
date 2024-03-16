@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <a href={% url "inicio" %}>Inicio</a>
-        <a href={% url "autos" %}>Autos</a>
-        <a href={% url "crear_auto" %}>Ingresar Auto</a>
-    </nav>
-    <h1>hola soy tu primera pagina web</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block h1_header %}
+hola soy tu primera pagina web
+{% endblock h1_header %}
+

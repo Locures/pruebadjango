@@ -21,12 +21,12 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href={% url "inicio" %}>Inicio</a>
-                <a class="navbar-brand" href={% url "autos" %}>Autos</a>
-                <a class="navbar-brand" href={% url "crear_auto" %}>Ingresar Auto</a>
+                <a class="navbar-brand" href={% url "autos" %}>Autos</a>              
                 <a class="btn btn-primary" href="#signup">Sign Up</a>
             </div>
         </nav>
         <!-- Masthead-->
+        {% block header %}
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
@@ -35,7 +35,7 @@
                             <!-- Page heading-->
                             <h1 class="mb-5">
                                 {% block h1_header %}
-
+                                Base
                                 {% endblock h1_header %}
                                </h1>
                             
@@ -43,7 +43,15 @@
                     </div>
                 </div>
             </div>
-        </header>
+        </header> 
+        {% endblock header %}
+        <main>
+            
+            {% block main %}
+            
+            {% endblock main %}
+
+        </main>
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">
